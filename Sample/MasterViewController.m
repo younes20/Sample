@@ -16,6 +16,17 @@
 
 @implementation MasterViewController
 
+-(void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController{
+    
+    NSLog(@"got it ? ");
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    NSLog(@"got it ? ");
+
+}
+
 - (void)awakeFromNib
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
@@ -34,6 +45,11 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    
+    UIStoryboard *stroy = [ UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
+    UIViewController *con = [stroy instantiateViewControllerWithIdentifier:@"Welcome"];
+    [self.navigationController pushViewController:con animated:NO];
+    [con dismissModalViewControllerAnimated:NO];
 }
 
 - (void)didReceiveMemoryWarning
